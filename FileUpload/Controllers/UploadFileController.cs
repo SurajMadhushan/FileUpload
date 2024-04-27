@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FileUpload.Data;
+using FileUpload.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.AspNetCore.StaticFiles;
 
 namespace FileUpload.Controllers
@@ -8,10 +11,31 @@ namespace FileUpload.Controllers
     [ApiController]
     public class UploadFileController : ControllerBase
     {
+
+        public readonly DataContext _context;
+
+        public UploadFileController(DataContext _context)
+        {
+            this._context = _context;
+        }
+
         [HttpPost]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
+
             var result = await WriteFile(file);
+
+            var newFile = new Models.File
+            {
+                FileName = result,
+                FilePath = result
+
+            };
+
+            _context.Add(newFile);
+            await _context.SaveChangesAsync();
+
+
             return Ok(result);
         }
 
@@ -46,8 +70,10 @@ namespace FileUpload.Controllers
             {
                 Console.WriteLine("Not uploaded");
             }
-            return fileName;
+            return (fileName);
         }
+
+        
 
 
         [HttpGet]
