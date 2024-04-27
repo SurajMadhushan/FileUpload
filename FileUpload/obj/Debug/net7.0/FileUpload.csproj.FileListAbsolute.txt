@@ -74,3 +74,4 @@ C:\Users\Suraj Madhushan\Desktop\Fileupload_sample\FileUpload\FileUpload\obj\Deb
 C:\Users\Suraj Madhushan\Desktop\Fileupload_sample\FileUpload\FileUpload\obj\Debug\net7.0\FileUpload.pdb
 C:\Users\Suraj Madhushan\Desktop\Fileupload_sample\FileUpload\FileUpload\obj\Debug\net7.0\FileUpload.genruntimeconfig.cache
 C:\Users\Suraj Madhushan\Desktop\Fileupload_sample\FileUpload\FileUpload\obj\Debug\net7.0\ref\FileUpload.dll
+C:\Users\Suraj Madhushan\Desktop\Fileupload_sample\FileUpload\FileUpload\obj\Debug\net7.0\FileUpload.sourcelink.json

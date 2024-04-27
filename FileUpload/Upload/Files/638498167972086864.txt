@@ -1,0 +1,190 @@
+import java.util.Scanner;
+
+public class Sample {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        BST b1 = new BST();
+
+        System.out.print("Enter key: ");
+        int num = scan.nextInt();
+
+
+        while (num != -1) {
+            
+            b1.insert(num); 
+            System.out.print("Enter key: ");
+            num = scan.nextInt();   
+        }
+
+
+        // System.out.print("Enter key2: ");
+        // num = scan.nextInt();
+
+        // System.out.println(b1.search(num));
+
+
+        System.out.println(b1.findancestor(b1.root, 6, 1).key);
+
+        scan.close();
+    }
+}
+
+
+class TreeNode {
+    int key;
+    TreeNode left, right;
+
+    public TreeNode(int key){
+        this.key = key;
+        left = right = null;
+    }
+}
+
+class BST{
+    
+    TreeNode root;
+   
+    public BST(){
+        root = null;
+    }
+
+    public void insert(int val){
+
+        TreeNode newNode = new TreeNode(val);
+
+        if(root == null){
+            System.out.println("Ïnserting...");
+            root= newNode;
+            
+        }
+        // else if(root.key == val){
+        //     System.out.println("Already added as root");
+        // }
+        else{
+            TreeNode current  = root;
+
+            while (true) {
+                if(val > current.key){
+                    if(current.right == null){
+                        System.out.println("Moving to right...");
+                        current.right = newNode;
+                         break;
+
+                    }else{
+                        System.out.println("Moving to right");
+                        current = current.right;
+                        
+                    }
+                }
+                else if(val < current.key){
+                    if(current.left == null){
+                        System.out.println("Moving to left...");
+                        current.left = newNode;
+                         break;
+
+                    }else{
+                        System.out.println("Moving to right...");
+                        current = current.left;
+                    }
+
+                }
+                else{
+                    System.out.println("Already added");
+                    break;
+
+                }
+            }
+        }
+    }
+
+
+    //search
+
+    public boolean search(int val){
+        TreeNode current  = root;
+
+        while (current != null) {
+            if (current.key == val) {
+                return true;
+            }else{
+                if(current.key < val){
+                    current = current.right;
+                }
+                else{
+                    current = current.left;
+                }
+            }
+        }
+        return false;
+
+    }
+
+
+    // public TreeNode findCommon(int node1, int node2){
+
+    //     if (root == null){
+    //         System.out.println("No root found");
+    //         return null;
+    //     }
+    //     else{
+    //         TreeNode current = root;
+
+    //         while(current != null){
+    //             if(node1 > current.key && node2 > current.key){
+    //                 current = current.right;
+    //             }
+    //             else if(node1 < current.key && node2 < current.key){
+    //                 current = current.left;
+    //             }
+    //             else{
+    //                 return current;
+    //             }
+                
+    //         }
+    //         System.out.println("no successer found");
+    //         return null;
+    //     }
+
+    // }
+
+
+    // public TreeNode findCommon(TreeNode root, int node1, int node2){
+    //     if (root == null) {
+    //         System.out.println("no root found");
+    //         return null;
+    //     }
+    //     else{
+
+            
+    //         if(node1 > root.key && node2 > root.key){
+
+    //             findCommon(root.right, node1, node2);
+    //         }
+    //         else if(node1 < root.key && node2 < root.key){
+    //             findCommon(root.left, node1, node2);
+    //         }
+    //         else{
+    //             return root;
+    //         }
+    //         System.out.println("not found");
+    //         return null;
+
+    //     }
+        
+        
+    // }
+
+    public TreeNode findancestor(TreeNode root,int val1,int val2){
+        if (root==null){
+            return null;
+        }
+        if (val1<root.key && val2<root.key){
+            return  findancestor(root.right,val1, val2);
+        }else if (val1>root.key && val2>root.key){
+            return findancestor(root.left, val1, val2);
+        }else{
+            return root;
+        }
+       }
+}
